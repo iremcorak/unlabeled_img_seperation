@@ -1,16 +1,12 @@
-# This is a sample Python script.
+import os
+import shutil
+import xml.etree.ElementTree as ET
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+def check_xml_name(xml_path):
+    tree = ET.parse(xml_path)
+    root = tree.getroot()
+    for obj in root.findall('object'):
+        name = obj.find('name')
+        if name is not None and name.text.strip():
+            return True
+    return False
